@@ -5,9 +5,9 @@ import lombok.*;
 
 @Entity
 @Table(name = "customers")
-@Data
 @Getter
 @Setter
+@EqualsAndHashCode(of = "id")
 @AllArgsConstructor
 @NoArgsConstructor
 public class CustomerModel {

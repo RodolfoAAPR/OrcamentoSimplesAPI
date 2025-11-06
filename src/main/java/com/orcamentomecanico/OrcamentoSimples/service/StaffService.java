@@ -2,6 +2,7 @@ package com.orcamentomecanico.OrcamentoSimples.service;
 
 import com.orcamentomecanico.OrcamentoSimples.model.StaffModel;
 import com.orcamentomecanico.OrcamentoSimples.repository.StaffRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,11 @@ public class StaffService {
         return staffRepository.findAll();
     }
 
+    public StaffModel findStaffById(Long id) {
+        return staffRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Staff not found with id " + id));
+    }
+
     public StaffModel registerStaff(StaffModel staffModel){
         return staffRepository.save(staffModel);
     }
@@ -26,7 +32,8 @@ public class StaffService {
     }
 
     public StaffModel updateStaff(Long id, StaffModel staffModel){
-        StaffModel newStaff = staffRepository.findById(id).get();
+        StaffModel newStaff = staffRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Staff not found with id " + id));
         newStaff.setName(staffModel.getName());
         newStaff.setRole(staffModel.getRole());
         return staffRepository.save(newStaff);

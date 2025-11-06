@@ -4,14 +4,13 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Data
+@Table(name = "services")
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@Table(name = "staffs")
 @EqualsAndHashCode(of = "id")
-public class StaffModel {
+@NoArgsConstructor
+@AllArgsConstructor
+public class ServiceModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,5 +18,7 @@ public class StaffModel {
 
     private String name;
 
-    private String role;
+    private String description;
+
+    private Double price;
 }
