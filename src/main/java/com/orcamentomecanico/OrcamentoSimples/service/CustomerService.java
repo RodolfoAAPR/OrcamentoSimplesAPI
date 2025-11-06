@@ -20,7 +20,7 @@ public class CustomerService {
 
     public CustomerModel findCustomerById(Long id) {
         return customerRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Customer not found with id " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado com o ID " + id));
     }
 
     public CustomerModel registerCustomer(CustomerModel customerModel){
@@ -33,11 +33,11 @@ public class CustomerService {
 
     public CustomerModel updateCustomer(Long id, CustomerModel customerModel){
         CustomerModel newCustomer = customerRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Customer not found with id " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado com o ID " + id));
         newCustomer.setCpf(customerModel.getCpf());
-        newCustomer.setName(customerModel.getName());
+        newCustomer.setNome(customerModel.getNome());
         newCustomer.setEmail(customerModel.getEmail());
-        newCustomer.setNumber(customerModel.getNumber());
+        newCustomer.setTelefone(customerModel.getTelefone());
         return customerRepository.save(newCustomer);
     }
 }

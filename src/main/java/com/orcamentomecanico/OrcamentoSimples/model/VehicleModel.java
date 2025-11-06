@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "vehicles")
+@Table(name = "veiculos") // Renomeando a tabela para português
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
@@ -17,18 +17,22 @@ public class VehicleModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String model;
+    @Column(name = "modelo")
+    private String modelo;
 
-    private String color;
+    @Column(name = "cor")
+    private String cor;
 
-    @Column(name = "\"year\"")
-    private Integer year;
+    @Column(name = "ano") // Mapeando explicitamente para evitar conflitos
+    private Integer ano;
 
-    private String registration;
+    @Column(name = "placa")
+    private String placa;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "proprietario_id") // Renomeando a coluna de chave estrangeira
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private CustomerModel owner;
+    private CustomerModel proprietario;
 
 
 }

@@ -20,7 +20,7 @@ public class StaffService {
 
     public StaffModel findStaffById(Long id) {
         return staffRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Staff not found with id " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Funcionário não encontrado com o ID " + id));
     }
 
     public StaffModel registerStaff(StaffModel staffModel){
@@ -33,9 +33,9 @@ public class StaffService {
 
     public StaffModel updateStaff(Long id, StaffModel staffModel){
         StaffModel newStaff = staffRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Staff not found with id " + id));
-        newStaff.setName(staffModel.getName());
-        newStaff.setRole(staffModel.getRole());
+                .orElseThrow(() -> new EntityNotFoundException("Funcionário não encontrado com o ID " + id));
+        newStaff.setNome(staffModel.getNome());
+        newStaff.setCargo(staffModel.getCargo());
         return staffRepository.save(newStaff);
     }
 }

@@ -40,8 +40,8 @@ public class BudgetController {
     }
 
     @PutMapping("/{id}/complete")
-    public BudgetModel completeService(@PathVariable Long id, @RequestParam int daysWorked) {
-        return budgetService.completeService(id, daysWorked);
+    public BudgetModel completeService(@PathVariable Long id, @RequestParam("diasTrabalhados") int diasTrabalhados) {
+        return budgetService.completeService(id, diasTrabalhados);
     }
 
     @DeleteMapping("/{id}")

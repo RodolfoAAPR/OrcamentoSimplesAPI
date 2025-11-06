@@ -4,20 +4,21 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Data
+@Table(name = "funcionarios") // Renomeando a tabela para português
 @Getter
 @Setter
+@EqualsAndHashCode(of = "id")
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "staffs")
-@EqualsAndHashCode(of = "id")
 public class StaffModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    @Column(name = "nome")
+    private String nome;
 
-    private String role;
+    @Column(name = "cargo")
+    private String cargo;
 }

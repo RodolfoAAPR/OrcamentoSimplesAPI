@@ -6,7 +6,7 @@ import lombok.*;
 import java.util.List;
 
 @Entity
-@Table(name = "budgets")
+@Table(name = "orcamentos") // Renomeando a tabela para português
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
@@ -19,22 +19,24 @@ public class BudgetModel {
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "vehicle_id", nullable = false)
-    private VehicleModel vehicle;
+    @JoinColumn(name = "veiculo_id", nullable = false) // Renomeando a coluna de chave estrangeira
+    private VehicleModel veiculo;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "staff_id", nullable = false)
-    private StaffModel evaluator;
+    @JoinColumn(name = "avaliador_id", nullable = false) // Renomeando a coluna de chave estrangeira
+    private StaffModel avaliador;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-        name = "budget_services",
-        joinColumns = @JoinColumn(name = "budget_id"),
-        inverseJoinColumns = @JoinColumn(name = "service_id")
+        name = "orcamento_servicos", // Renomeando a tabela de junção
+        joinColumns = @JoinColumn(name = "orcamento_id"),
+        inverseJoinColumns = @JoinColumn(name = "servico_id")
     )
-    private List<ServiceModel> services;
+    private List<ServiceModel> servicos;
 
-    private String status; // PENDING, APPROVED, IN_PROGRESS, COMPLETED
+    @Column(name = "status")
+    private String status; // PENDENTE, APROVADO, EM_ANDAMENTO, CONCLUIDO
 
-    private Integer daysWorked;
+    @Column(name = "dias_trabalhados")
+    private Integer diasTrabalhados;
 }

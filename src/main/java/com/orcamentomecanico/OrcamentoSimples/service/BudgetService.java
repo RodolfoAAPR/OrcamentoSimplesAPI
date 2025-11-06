@@ -20,33 +20,32 @@ public class BudgetService {
 
     public BudgetModel findBudgetById(Long id) {
         return budgetRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Budget not found with id " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Orçamento não encontrado com o ID " + id));
     }
 
     public BudgetModel createBudget(BudgetModel budgetModel) {
-        budgetModel.setStatus("PENDING");
-        budgetModel.setDaysWorked(0);
+        budgetModel.setStatus("PENDENTE");
+        budgetModel.setDiasTrabalhados(0);
         BudgetModel savedBudget = budgetRepository.save(budgetModel);
-        // Recarrega o orçamento recém-salvo para garantir que todas as relações EAGER sejam populadas
         return findBudgetById(savedBudget.getId());
     }
 
     public BudgetModel approveBudget(Long id) {
         BudgetModel budget = findBudgetById(id);
-        budget.setStatus("APPROVED");
+        budget.setStatus("APROVADO");
         return budgetRepository.save(budget);
     }
 
     public BudgetModel startService(Long id) {
         BudgetModel budget = findBudgetById(id);
-        budget.setStatus("IN_PROGRESS");
+        budget.setStatus("EM_ANDAMENTO");
         return budgetRepository.save(budget);
     }
 
-    public BudgetModel completeService(Long id, int daysWorked) {
+    public BudgetModel completeService(Long id, int diasTrabalhados) {
         BudgetModel budget = findBudgetById(id);
-        budget.setStatus("COMPLETED");
-        budget.setDaysWorked(daysWorked);
+        budget.setStatus("CONCLUIDO");
+        budget.setDiasTrabalhados(diasTrabalhados);
         return budgetRepository.save(budget);
     }
 

@@ -25,16 +25,16 @@ public class VehicleService {
 
     public VehicleModel findVehicleById(Long id) {
         return vehicleRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Vehicle not found with id " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Veículo não encontrado com o ID " + id));
     }
 
     public VehicleModel registerVehicle(VehicleModel vehicleModel){
-        if (vehicleModel.getOwner() == null || vehicleModel.getOwner().getId() == null) {
-            throw new IllegalStateException("Customer ID cannot be null");
+        if (vehicleModel.getProprietario() == null || vehicleModel.getProprietario().getId() == null) {
+            throw new IllegalStateException("ID do Cliente não pode ser nulo");
         }
-        CustomerModel customer = customerRepository.findById(vehicleModel.getOwner().getId())
-                .orElseThrow(() -> new EntityNotFoundException("Customer not found with id " + vehicleModel.getOwner().getId()));
-        vehicleModel.setOwner(customer);
+        CustomerModel customer = customerRepository.findById(vehicleModel.getProprietario().getId())
+                .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado com o ID " + vehicleModel.getProprietario().getId()));
+        vehicleModel.setProprietario(customer);
         return vehicleRepository.save(vehicleModel);
     }
 
@@ -44,18 +44,18 @@ public class VehicleService {
 
     public VehicleModel updateVehicle(Long id, VehicleModel vehicleModel){
         VehicleModel newVehicle = vehicleRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Vehicle not found with id " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Veículo não encontrado com o ID " + id));
 
-        if (vehicleModel.getOwner() != null && vehicleModel.getOwner().getId() != null) {
-            CustomerModel customer = customerRepository.findById(vehicleModel.getOwner().getId())
-                    .orElseThrow(() -> new EntityNotFoundException("Customer not found with id " + vehicleModel.getOwner().getId()));
-            newVehicle.setOwner(customer);
+        if (vehicleModel.getProprietario() != null && vehicleModel.getProprietario().getId() != null) {
+            CustomerModel customer = customerRepository.findById(vehicleModel.getProprietario().getId())
+                    .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado com o ID " + vehicleModel.getProprietario().getId()));
+            newVehicle.setProprietario(customer);
         }
 
-        newVehicle.setColor(vehicleModel.getColor());
-        newVehicle.setModel(vehicleModel.getModel());
-        newVehicle.setYear(vehicleModel.getYear());
-        newVehicle.setRegistration(vehicleModel.getRegistration());
+        newVehicle.setCor(vehicleModel.getCor());
+        newVehicle.setModelo(vehicleModel.getModelo());
+        newVehicle.setAno(vehicleModel.getAno());
+        newVehicle.setPlaca(vehicleModel.getPlaca());
 
         return vehicleRepository.save(newVehicle);
     }

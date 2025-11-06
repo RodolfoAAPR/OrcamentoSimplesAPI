@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "services")
+@Table(name = "servicos") // Renomeando a tabela para português
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
@@ -16,9 +16,12 @@ public class ServiceModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    @Column(name = "nome")
+    private String nome;
 
-    private String description;
+    @Column(name = "descricao")
+    private String descricao;
 
-    private Double price;
+    @Column(name = "preco")
+    private Double preco;
 }

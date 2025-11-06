@@ -20,7 +20,7 @@ public class ServiceService {
 
     public ServiceModel findServiceById(Long id) {
         return serviceRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Service not found with id " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Serviço não encontrado com o ID " + id));
     }
 
     public ServiceModel registerService(ServiceModel serviceModel) {
@@ -33,10 +33,10 @@ public class ServiceService {
 
     public ServiceModel updateService(Long id, ServiceModel serviceModel) {
         ServiceModel newService = serviceRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Service not found with id " + id));
-        newService.setName(serviceModel.getName());
-        newService.setDescription(serviceModel.getDescription());
-        newService.setPrice(serviceModel.getPrice());
+                .orElseThrow(() -> new EntityNotFoundException("Serviço não encontrado com o ID " + id));
+        newService.setNome(serviceModel.getNome());
+        newService.setDescricao(serviceModel.getDescricao());
+        newService.setPreco(serviceModel.getPreco());
         return serviceRepository.save(newService);
     }
 }
